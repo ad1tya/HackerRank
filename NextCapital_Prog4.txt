@@ -1,0 +1,39 @@
+//int length = 5;
+	    	int florist[][] = {{0,5},{0,5},{0,5},{0,5},{0,5},{5,6},{6,7}};//new int[length][length];
+	    	int length = 5 +1;
+	    	//int florist[][] = {{0,1},{1,2},{2,3},{3,4},{5,5}};//,{5,6},{6,7}};//new int[length][length];
+	    	int arr[] = new int[length];
+	    	
+	    	
+	    	int result = florist.length;
+	    	for(int index = 0;index<florist.length;index++) {
+	    		if(florist[index][1] > length-1) {
+	    			florist[index][1] = length-1;
+	    		}
+	    	}
+	    	
+	    	for(int index = 0;index<florist.length;index++) {// ar : florist) {
+	    		int[] ar = florist[index];
+	    		if(ar[0]>=length) {
+	    			result -= 1;
+	    			continue;
+	    		}
+				int start = ar[0];
+				int last = ar[1];
+	    		
+	    		int overlap = 0;
+	    		for(int i=start;i<=last;i++) {
+	    			if(arr[i] < 3) {
+	    				arr[i] += 1;
+	    			} else {
+	    				++overlap;
+	    			}
+	    		}
+	    		if(overlap == last-1) {
+	    			result -= 1;
+	    		}
+	    	}
+	    	
+	    	
+	    	System.out.println(result);
+	    	return null;

@@ -1,0 +1,48 @@
+/*
+ * Complete the function below.
+ */
+
+    static String[] strengthenPasswords(String[] passwords) {
+        String result[] = new String[passwords.length];
+        int index = 0;
+        for(String password : passwords){
+        password = password.replace('s', '5');
+        password = password.replace('S', '5');
+        if(password.length()%2 !=0){
+            if(Character.isDigit(password.toCharArray()[password.length() / 2])){
+                 int num = Integer.parseInt(password.toCharArray()[password.length() / 2]+"");
+	                String s1 = password.substring(0, password.length()/2 );
+	                String s2 = Integer.toString(num * 2);
+	                String s3 = password.substring(password.length()/2 + 1, password.length());
+	                password = s1 + s2 + s3;
+            }
+        
+               } else {
+                   char temp[] = password.toCharArray();
+                   char temp1 = temp[0];
+                   temp[0] = temp[password.length() - 1];
+                   temp[password.length() - 1] = temp1;
+                   password = new String(temp);//.toString();
+               }
+               if(password.toLowerCase().contains("nextcapital")){
+                   int start = password.toLowerCase().indexOf("next");
+                   String temp = password.substring(start, start + 4);
+                   temp = new StringBuilder(temp).reverse().toString();
+                   System.out.println(temp);
+                   char temp1[] = password.toCharArray();
+                   char temp2[] = temp.toCharArray();
+                   temp1[start] = temp2[0];
+                   temp1[start+1] = temp2[1];
+                   temp1[start+2] = temp2[2];
+                   temp1[start+3] = temp2[3];
+                   System.out.println(temp1);
+                   
+                   password = new String(temp1);//Character.toString(temp1);
+               }
+        
+        result[index] = password;
+        index++;       
+    
+    }
+               return result;
+               }

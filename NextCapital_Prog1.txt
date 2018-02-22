@@ -1,0 +1,89 @@
+/*
+ * Complete the function below.
+ */
+
+    static int[][] solveMinesweeper(String[][] puzzleArray) {
+        int result[][] = new int[puzzleArray.length][puzzleArray[0].length];
+        for(int row = 0;row < puzzleArray.length; row++){
+            for(int col = 0;col < puzzleArray[0].length; col++) {
+                if(puzzleArray[row][col].equals("m"))
+                    result[row][col] = -1;
+                else if(col != 0 && puzzleArray[row][col - 1].equals("m")){
+                    result[row][col] = 0;
+                }
+                else{
+                    int mine = 0;
+                        int double1 = 0;
+                        int triple = 0;
+                    int below = 0;
+                        if(row -1 >=0 && col-1 >= 0){
+                            if(puzzleArray[row -1][col - 1].equals("m")){
+                             double1 = 1;   
+                             mine++;
+                            }    
+                        }
+                        if(row-1 >= 0){
+                            if(puzzleArray[row -1][col].equals("m")){
+                                //result[row][col] = 2;
+                                below = 1;
+                                ++mine;
+                            }
+                        }
+                        
+                        if(row-1 >= 0 && col +1 < puzzleArray[0].length){
+                            if(puzzleArray[row -1][col +1].equals("m")){
+                                mine++;
+                                double1 = 1;
+                            }
+                        }
+                        if(col-1 >= 0){
+                            if(puzzleArray[row][col-1].equals("m")) mine++;
+                        }
+                        if(col +1 < puzzleArray[0].length){
+                            if(puzzleArray[row][col +1].equals("m")) mine++;
+                        }
+                        if(row+1 < puzzleArray.length && col-1 >= 0){
+                            if(puzzleArray[row + 1][col -1 ].equals("m")){
+                             double1 = 1;   
+                            mine++;
+                            }
+                        }
+                        if(row+1 < puzzleArray.length){
+                            if(puzzleArray[row +1][col].equals("m")) mine++;
+                        }
+                        if(row+1 < puzzleArray.length && col+1 < puzzleArray[0].length){
+                            if(puzzleArray[row +1][col+1].equals("m")){
+                                mine++;
+                                double1 = 1;
+                            }
+                        }
+                        if(row%2 != 0){
+                            for(int i=0;i<puzzleArray[0].length;i++){
+                                if(puzzleArray[row][i].equals("m")){
+                                    triple = 1;
+                                }
+                            }
+                        }
+                    System.out.println(mine);
+                        //if(result[row][col] != 0){
+                            result[row][col] = mine;
+                        //}
+                    if(below > 0){
+                        result[row][col] = 2;
+                    }
+                        if(double1 > 0){
+                            result[row][col] = result[row][col] *2;
+                        }
+                        if(triple > 0){
+                            result[row][col] = result[row][col] *3;
+                        }
+                        
+                    
+                }
+            }
+        }
+        return result;
+
+    }
+
+
